@@ -70,7 +70,7 @@ def get_parent_class(value, dictionary):
                     yield res
 
 class COCO(BaseDataLoader):
-    def __init__(self, data_dir, batch_size, split, crop_size=None, base_size=None, scale=True, num_workers=1, partition = 'CocoStuff164k',
+    def __init__(self, data_dir, batch_size, split, crop_size=None, base_size=None, scale=True, num_workers=1, partition = 'CocoStuff10k',
                     shuffle=False, flip=False, rotate=False, blur= False, augment=False, val_split= None, return_id=False, val=False):
 
         self.MEAN = [0.43931922, 0.41310471, 0.37480941]

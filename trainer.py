@@ -8,6 +8,7 @@ from base import BaseTrainer, DataPrefetcher
 from utils.helpers import colorize_mask
 from utils.metrics import eval_metrics, AverageMeter
 from tqdm import tqdm
+import wandb
 
 class Trainer(BaseTrainer):
     def __init__(self, model, loss, resume, config, train_loader, val_loader=None, train_logger=None, prefetch=True):
@@ -90,6 +91,7 @@ class Trainer(BaseTrainer):
                                                 epoch, self.total_loss.average, 
                                                 pixAcc, mIoU,
                                                 self.batch_time.average, self.data_time.average))
+            wandb.log({"loss":self.total_loss.average, "mIoU": mIoU}, step=batch_idx)
 
         # METRICS TO TENSORBOARD
         seg_metrics = self._get_seg_metrics()

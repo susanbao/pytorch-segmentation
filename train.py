@@ -10,6 +10,9 @@ from utils import losses
 from utils import Logger
 from utils.torchsummary import summary
 from trainer import Trainer
+import wandb
+import socket
+import ipdb
 
 def get_instance(module, name, config, *args):
     # GET THE CORRESPONDING CLASS / FCT 
@@ -25,6 +28,7 @@ def main(config, resume):
     # MODEL
     model = get_instance(models, 'arch', config, train_loader.dataset.num_classes)
     print(f'\n{model}\n')
+    wandb.watch(model, log="all")
 
     # LOSS
     loss = getattr(losses, config['loss'])(ignore_index = config['ignore_index'])
@@ -42,6 +46,7 @@ def main(config, resume):
     trainer.train()
 
 if __name__=='__main__':
+    # ipdb.set_trace()
     # PARSE THE ARGS
     parser = argparse.ArgumentParser(description='PyTorch Training')
     parser.add_argument('-c', '--config', default='config.json',type=str,
@@ -58,4 +63,16 @@ if __name__=='__main__':
     if args.device:
         os.environ["CUDA_VISIBLE_DEVICES"] = args.device
     
+    # start a new wandb run to track this script
+    wandb.init(
+        # set the wandb project where this run will be logged
+        project="Bosch_active_testing",
+        config=config,
+        entity="susanbao",
+        notes=socket.gethostname(),
+        name=config['name'],
+        job_type="training"
+    )
+    
     main(config, args.resume)
+    wandb.finish()
