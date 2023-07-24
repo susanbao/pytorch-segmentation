@@ -61,8 +61,6 @@ class BaseDataSet(Dataset):
         return image, label
 
     def _augmentation(self, image, label):
-        if image.shape != 3:
-            return image, label
         h, w, _ = image.shape
         # Scaling, we set the bigger to base size, and the smaller 
         # one is rescaled to maintain the same ratio, if we don't have any obj in the image, re-do the processing
