@@ -61,7 +61,7 @@ class BaseDataSet(Dataset):
         return image, label
 
     def _augmentation(self, image, label):
-        h, w, _ = image.shape
+        h, w = image.shape[:2]
         # Scaling, we set the bigger to base size, and the smaller 
         # one is rescaled to maintain the same ratio, if we don't have any obj in the image, re-do the processing
         if self.base_size:
@@ -73,7 +73,7 @@ class BaseDataSet(Dataset):
             image = cv2.resize(image, (w, h), interpolation=cv2.INTER_LINEAR)
             label = cv2.resize(label, (w, h), interpolation=cv2.INTER_NEAREST)
     
-        h, w, _ = image.shape
+        h, w = image.shape[:2]
         # Rotate the image with an angle between -10 and 10
         if self.rotate:
             angle = random.randint(-10, 10)
@@ -97,7 +97,7 @@ class BaseDataSet(Dataset):
                 label = cv2.copyMakeBorder(label, value=0, **pad_kwargs)
             
             # Cropping 
-            h, w, _ = image.shape
+            h, w = image.shape[:2]
             start_h = random.randint(0, h - self.crop_size)
             start_w = random.randint(0, w - self.crop_size)
             end_h = start_h + self.crop_size

@@ -10,6 +10,14 @@ from utils.metrics import eval_metrics, AverageMeter
 from tqdm import tqdm
 import wandb
 
+def np_read(file):
+    with open(file, "rb") as outfile:
+        data = np.load(outfile)
+    return data
+def np_write(data, file):
+    with open(file, "wb") as outfile:
+        np.save(outfile, data)
+
 class Trainer(BaseTrainer):
     def __init__(self, model, loss, resume, config, train_loader, val_loader=None, train_logger=None, prefetch=True):
         super(Trainer, self).__init__(model, loss, resume, config, train_loader, val_loader, train_logger)
@@ -165,6 +173,69 @@ class Trainer(BaseTrainer):
             for k, v in list(seg_metrics.items())[:-1]: 
                 self.writer.add_scalar(f'{self.wrt_mode}/{k}', v, self.wrt_step)
 
+            log = {
+                'val_loss': self.total_loss.average,
+                **seg_metrics
+            }
+
+        return log
+
+    def _save_feature(self, output, target, batch_idx, path):
+        np_write(output.cpu().numpy(), path + f"output/{batch_idx}.npy")
+        np_write(target.cpu().numpy(), path + f"target/{batch_idx}.npy")
+
+    def _test_epoch(self):
+        if self.val_loader is None:
+            self.logger.warning('Not data loader was passed for the validation step, No validation is performed !')
+            return {}
+        self.logger.info('\n###### EVALUATION ######')
+
+        self.model.eval()
+        self.wrt_mode = 'val'
+
+        self._reset_metrics()
+        tbar = tqdm(self.val_loader, ncols=1)
+        with torch.no_grad():
+            val_visual = []
+            for batch_idx, (data, target) in enumerate(tbar):
+                #data, target = data.to(self.device), target.to(self.device)
+                # LOSS
+                output = self.model(data)
+                if self.save_feature:
+                    self._save_feature(output, target, batch_idx, self.save_feature_path)
+                loss = self.loss(output, target)
+                if isinstance(self.loss, torch.nn.DataParallel):
+                    loss = loss.mean()
+                self.total_loss.update(loss.item())
+
+                seg_metrics = eval_metrics(output, target, self.num_classes)
+                self._update_seg_metrics(*seg_metrics)
+
+                # LIST OF IMAGE TO VIZ (15 images)
+                if len(val_visual) < 15:
+                    target_np = target.data.cpu().numpy()
+                    output_np = output.data.max(1)[1].cpu().numpy()
+                    val_visual.append([data[0].data.cpu(), target_np[0], output_np[0]])
+
+                # PRINT INFO
+                pixAcc, mIoU, _ = self._get_seg_metrics().values()
+                tbar.set_description('Loss: {:.3f}, PixelAcc: {:.2f}, Mean IoU: {:.2f} |'.format(
+                                                self.total_loss.average,
+                                                pixAcc, mIoU))
+
+            # WRTING & VISUALIZING THE MASKS
+            val_img = []
+            palette = self.train_loader.dataset.palette
+            for d, t, o in val_visual:
+                d = self.restore_transform(d)
+                t, o = colorize_mask(t, palette), colorize_mask(o, palette)
+                d, t, o = d.convert('RGB'), t.convert('RGB'), o.convert('RGB')
+                [d, t, o] = [self.viz_transform(x) for x in [d, t, o]]
+                val_img.extend([d, t, o])
+            val_img = torch.stack(val_img, 0)
+            val_img = make_grid(val_img.cpu(), nrow=3, padding=5)
+
+            seg_metrics = self._get_seg_metrics()
             log = {
                 'val_loss': self.total_loss.average,
                 **seg_metrics

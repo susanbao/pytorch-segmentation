@@ -192,7 +192,8 @@ class UNetResnet(BaseModel):
         if x.size(2) != H or x.size(3) != W:
             x = F.interpolate(x, size=(H, W), mode="bilinear", align_corners=True)
 
-        x = self.conv7(self.conv6(x))
+        x = self.conv6(x)
+        x = self.conv7(x)
         return x
 
     def get_backbone_params(self):

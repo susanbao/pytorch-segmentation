@@ -108,6 +108,10 @@ outputs/
 datasets/
 pretrained/
 trained_models/
+pro_data/
+ckpts/
+results/
+wandb/
 
 # editor, os cache directory
 .vscode/

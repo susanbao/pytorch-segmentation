@@ -27,6 +27,8 @@ class BaseTrainer:
         self.do_validation = self.config['trainer']['val']
         self.start_epoch = 1
         self.improved = False
+        self.save_feature = self.config['save_feature']['save_feature']
+        self.save_feature_path = self.config['save_feature']['saved_path']
 
         # SETTING THE DEVICE
         self.device, availble_gpus = self._get_available_devices(self.config['n_gpu'])
@@ -134,6 +136,13 @@ class BaseTrainer:
             # SAVE CHECKPOINT
             if epoch % self.save_period == 0:
                 self._save_checkpoint(epoch, save_best=self.improved)
+        
+    def test(self):
+        results = self._test_epoch()
+        # LOGGING INFO
+        self.logger.info(f'\n         ## Info for test data set ## ')
+        for k, v in results.items():
+            self.logger.info(f'         {str(k):15s}: {v}')
 
     def _save_checkpoint(self, epoch, save_best=False):
         state = {

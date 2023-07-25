@@ -1,7 +1,7 @@
 protobuf==3.19.6
 tqdm==4.32.2
 grpcio==1.36.1
-torchvision==0.2.2
-tensorboard==1.14.0
+torchvision==0.13.1
+tensorboard==1.15.0
 Pillow==6.2.0
 opencv-python==4.1.0.25
