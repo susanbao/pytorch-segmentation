@@ -21,7 +21,7 @@ def main(config, resume):
 
     # DATA LOADERS
     train_loader = get_instance(dataloaders, 'train_loader', config)
-    val_loader = get_instance(dataloaders, 'train_val_loader', config)
+    val_loader = get_instance(dataloaders, 'val_loader', config)
 
     # MODEL
     model = get_instance(models, 'arch', config, train_loader.dataset.num_classes)

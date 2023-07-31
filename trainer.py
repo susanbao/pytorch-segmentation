@@ -180,7 +180,8 @@ class Trainer(BaseTrainer):
 
         return log
 
-    def _save_feature(self, output, target, batch_idx, path):
+    def _save_feature(self, image, output, target, batch_idx, path):
+        np_write(image.cpu().numpy(), path + f"image/{batch_idx}.npy")
         np_write(output.cpu().numpy(), path + f"output/{batch_idx}.npy")
         np_write(target.cpu().numpy(), path + f"target/{batch_idx}.npy")
 
@@ -202,7 +203,7 @@ class Trainer(BaseTrainer):
                 # LOSS
                 output = self.model(data)
                 if self.save_feature:
-                    self._save_feature(output, target, batch_idx, self.save_feature_path)
+                    self._save_feature(data, output, target, batch_idx, self.save_feature_path)
                 loss = self.loss(output, target)
                 if isinstance(self.loss, torch.nn.DataParallel):
                     loss = loss.mean()
