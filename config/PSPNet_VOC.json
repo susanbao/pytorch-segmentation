@@ -90,5 +90,9 @@
     "save_feature": {
         "save_feature": true,
         "saved_path": "/workspace/pytorch-segmentation/pro_data/PSPNet_VOC/val/"
+    },
+
+    "seed": {
+        "seed": 11
     }
 }

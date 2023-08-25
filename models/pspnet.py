@@ -74,6 +74,7 @@ class PSPNet(BaseModel):
         if freeze_backbone: 
             set_trainable([self.initial, self.layer1, self.layer2, self.layer3, self.layer4], False)
 
+
     def forward(self, x):
         input_size = (x.size()[2], x.size()[3])
         x = self.initial(x)

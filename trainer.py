@@ -42,6 +42,7 @@ class Trainer(BaseTrainer):
             self.val_loader = DataPrefetcher(val_loader, device=self.device)
 
         torch.backends.cudnn.benchmark = True
+        self.output_name = config['seed']['seed']
 
     def _train_epoch(self, epoch):
         self.logger.info('\n')
@@ -180,7 +181,7 @@ class Trainer(BaseTrainer):
 
         return log
 
-    def _save_feature(self, image, output, target, batch_idx, path):
+    def _save_feature(self, image, output, target, batch_idx, path, extend_name=None):
         np_write(image.cpu().numpy(), path + f"image/{batch_idx}.npy")
         np_write(output.cpu().numpy(), path + f"output/{batch_idx}.npy")
         np_write(target.cpu().numpy(), path + f"target/{batch_idx}.npy")

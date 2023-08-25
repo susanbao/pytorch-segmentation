@@ -40,6 +40,7 @@ def main(config, resume):
         val_loader=val_loader,
         train_logger=train_logger)
 
+    torch.manual_seed(config['seed']['seed'])
     trainer.test()
 
 if __name__=='__main__':
