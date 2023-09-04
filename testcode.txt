@@ -1,3 +1,5 @@
+conda activate at_seg
+
 python train.py --config ./config/PSPNet_coco.json
 
 python train.py --config ./config/UNet_coco.json >results/UNet_coco.log 2>results/UNet_coco.err&
