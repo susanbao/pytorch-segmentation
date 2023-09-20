@@ -1,5 +1,6 @@
 import numpy as np
 import json
+import os
 
 def read_one_results(path):
     with open(path, "r") as outfile:
@@ -17,3 +18,7 @@ def np_read(file):
 def np_write(data, file):
     with open(file, "wb") as outfile:
         np.save(outfile, data)
+        
+def check_folder_exist(folder):
+    if not os.path.exists(folder):
+        os.makedirs(folder)

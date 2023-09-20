@@ -9,14 +9,14 @@
             "backbone": "resnet50",
             "pretrained": true,
             "freeze_bn": false,
-            "freeze_backbone": true
+            "freeze_backbone": false
         }
     },
 
     "train_loader": {
         "type": "COCO",
         "args":{
-            "data_dir": "/workspace/datasets/coco_stuff10k",
+            "data_dir": "/data/active_testing/active_testing_seg/datasets/coco10k",
             "batch_size": 8,
             "base_size": 400,
             "crop_size": 380,
@@ -34,11 +34,23 @@
     "val_loader": {
         "type": "COCO",
         "args":{
-            "data_dir": "/workspace/datasets/coco_stuff10k",
-            "batch_size": 1,
+            "data_dir": "/data/active_testing/active_testing_seg/datasets/coco10k",
+            "batch_size": 8,
             "crop_size": 480,
             "val": true,
             "split": "test",
+            "num_workers": 1
+        }
+    },
+    
+    "train_val_loader": {
+        "type": "COCO",
+        "args":{
+            "data_dir": "/data/active_testing/active_testing_seg/datasets/coco10k",
+            "batch_size": 8,
+            "crop_size": 480,
+            "val": true,
+            "split": "train",
             "num_workers": 1
         }
     },
@@ -74,5 +86,14 @@
 
         "val": true,
         "val_per_epochs": 5
+    },
+    
+    "save_feature": {
+        "save_feature": true,
+        "saved_path": "/data/active_testing/active_testing_seg/pytorch-segmentation/pro_data/UNet_COCO10k/val/"
+    },
+
+    "seed": {
+        "seed": 11
     }
 }

@@ -9,6 +9,7 @@ from utils.helpers import colorize_mask
 from utils.metrics import eval_metrics, AverageMeter
 from tqdm import tqdm
 import wandb
+import os
 
 def np_read(file):
     with open(file, "rb") as outfile:
@@ -17,6 +18,10 @@ def np_read(file):
 def np_write(data, file):
     with open(file, "wb") as outfile:
         np.save(outfile, data)
+        
+def check_folder_exist(folder):
+    if not os.path.exists(folder):
+        os.makedirs(folder)
 
 class Trainer(BaseTrainer):
     def __init__(self, model, loss, resume, config, train_loader, val_loader=None, train_logger=None, prefetch=True):
@@ -182,6 +187,9 @@ class Trainer(BaseTrainer):
         return log
 
     def _save_feature(self, image, output, target, batch_idx, path, extend_name=None):
+        check_folder_exist(path + "image")
+        check_folder_exist(path + "output")
+        check_folder_exist(path + "target")
         np_write(image.cpu().numpy(), path + f"image/{batch_idx}.npy")
         np_write(output.cpu().numpy(), path + f"output/{batch_idx}.npy")
         np_write(target.cpu().numpy(), path + f"target/{batch_idx}.npy")
