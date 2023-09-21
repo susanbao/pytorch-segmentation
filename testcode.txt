@@ -1,7 +1,9 @@
 conda activate at_seg
 
 CUDA_VISIBLE_DEVICES=1 python train.py --config ./config/UNet_coco.json >results/UNet_coco.log 2>results/UNet_coco.err&
-CUDA_VISIBLE_DEVICES=1 python test.py --config ./config/UNet_coco.json --resume saved/UNetResnet/09-17_19-20/best_model.pth
+CUDA_VISIBLE_DEVICES=1 python test.py --config ./config/UNet_coco.json --resume saved/UNetResnet/coco10k/best_model.pth
+
+CUDA_VISIBLE_DEVICES=1 python train.py --config ./config/UNet_VOC.json >results/UNet_VOC.log 2>results/UNet_VOC.err&
 
 python train.py --config ./config/UNet_coco.json >results/UNet_coco.log 2>results/UNet_coco.err&
 
