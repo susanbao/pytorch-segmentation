@@ -1,22 +1,21 @@
 {
-    "name": "UNetResnet_VOC",
+    "name": "PSPNet_CITY",
     "n_gpu": 1,
     "use_synch_bn": false,
 
     "arch": {
-        "type": "UNetResnet",
+        "type": "PSPNet",
         "args": {
             "backbone": "resnet50",
-            "pretrained": true,
             "freeze_bn": false,
             "freeze_backbone": false
         }
     },
 
     "train_loader": {
-        "type": "VOC",
+        "type": "CityScapes",
         "args":{
-            "data_dir": "/data/active_testing/active_testing_seg/datasets/PascalVOC",
+            "data_dir": "/data/active_testing/active_testing_seg/datasets/Cityscapes",
             "batch_size": 8,
             "base_size": 400,
             "crop_size": 380,
@@ -26,32 +25,35 @@
             "flip": true,
             "rotate": true,
             "blur": false,
-            "split": "train_aug",
-            "num_workers": 8
+            "split": "train",
+            "num_workers": 1,
+            "mode": "fine"
         }
     },
 
     "val_loader": {
-        "type": "VOC",
+        "type": "CityScapes",
         "args":{
-            "data_dir": "/data/active_testing/active_testing_seg/datasets/PascalVOC",
+            "data_dir": "/data/active_testing/active_testing_seg/datasets/Cityscapes",
             "batch_size": 8,
             "crop_size": 480,
             "val": true,
             "split": "val",
-            "num_workers": 1
+            "num_workers": 1,
+            "mode": "fine"
         }
     },
-
+    
     "train_val_loader": {
-        "type": "VOC",
+        "type": "CityScapes",
         "args":{
-            "data_dir": "/data/active_testing/active_testing_seg/datasets/PascalVOC",
+            "data_dir": "/data/active_testing/active_testing_seg/datasets/Cityscapes",
             "batch_size": 8,
             "crop_size": 480,
             "val": true,
             "split": "train",
-            "num_workers": 1
+            "num_workers": 1,
+            "mode": "fine"
         }
     },
 
@@ -80,17 +82,17 @@
         "monitor": "max Mean_IoU",
         "early_stop": 10,
         
-        "tensorboard": true,
+        "tensorboard": false,
         "log_dir": "saved/runs",
         "log_per_iter": 20,
 
         "val": true,
         "val_per_epochs": 5
     },
-
+    
     "save_feature": {
         "save_feature": true,
-        "saved_path": "/data/active_testing/active_testing_seg/pytorch-segmentation/pro_data/UNet_VOC/train/"
+        "saved_path": "/data/active_testing/active_testing_seg/pytorch-segmentation/pro_data/PSPNet_CITY/val/"
     },
 
     "seed": {

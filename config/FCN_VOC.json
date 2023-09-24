@@ -1,12 +1,11 @@
 {
-    "name": "UNetResnet_VOC",
+    "name": "FCN_VOC",
     "n_gpu": 1,
     "use_synch_bn": false,
 
     "arch": {
-        "type": "UNetResnet",
+        "type": "FCN8",
         "args": {
-            "backbone": "resnet50",
             "pretrained": true,
             "freeze_bn": false,
             "freeze_backbone": false
@@ -90,7 +89,7 @@
 
     "save_feature": {
         "save_feature": true,
-        "saved_path": "/data/active_testing/active_testing_seg/pytorch-segmentation/pro_data/UNet_VOC/train/"
+        "saved_path": "/data/active_testing/active_testing_seg/pytorch-segmentation/pro_data/FCN_VOC/train/"
     },
 
     "seed": {

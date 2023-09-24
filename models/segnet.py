@@ -175,7 +175,7 @@ class LastBottleneck(nn.Module):
         return out
 
 class SegResNet(BaseModel):
-    def __init__(self, num_classes, in_channels=3, pretrained=True, freeze_bn=False, **_):
+    def __init__(self, num_classes, in_channels=3, pretrained=True, freeze_bn=False, freeze_backbone=False, **_):
         super(SegResNet, self).__init__()
         resnet50 = models.resnet50(pretrained=pretrained)
         encoder = list(resnet50.children())

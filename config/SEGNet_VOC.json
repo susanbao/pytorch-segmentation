@@ -1,10 +1,10 @@
 {
-    "name": "UNetResnet_VOC",
+    "name": "SEGNet_VOC",
     "n_gpu": 1,
     "use_synch_bn": false,
 
     "arch": {
-        "type": "UNetResnet",
+        "type": "SegResNet",
         "args": {
             "backbone": "resnet50",
             "pretrained": true,
@@ -89,8 +89,8 @@
     },
 
     "save_feature": {
-        "save_feature": true,
-        "saved_path": "/data/active_testing/active_testing_seg/pytorch-segmentation/pro_data/UNet_VOC/train/"
+        "save_feature": false,
+        "saved_path": "/data/active_testing/active_testing_seg/pytorch-segmentation/pro_data/SEGNet_VOC/val/"
     },
 
     "seed": {

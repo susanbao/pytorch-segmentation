@@ -7,7 +7,7 @@ import torch
 from itertools import chain
 
 class FCN8(BaseModel):
-    def __init__(self, num_classes, pretrained=True, freeze_bn=False, **_):
+    def __init__(self, num_classes, pretrained=True, freeze_bn=False, freeze_backbone = False, **_):
         super(FCN8, self).__init__()
         vgg = models.vgg16(pretrained)
         features = list(vgg.features.children())

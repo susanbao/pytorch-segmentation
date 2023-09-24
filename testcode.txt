@@ -3,7 +3,33 @@ conda activate at_seg
 CUDA_VISIBLE_DEVICES=1 python train.py --config ./config/UNet_coco.json >results/UNet_coco.log 2>results/UNet_coco.err&
 CUDA_VISIBLE_DEVICES=1 python test.py --config ./config/UNet_coco.json --resume saved/UNetResnet/coco10k/best_model.pth
 
-CUDA_VISIBLE_DEVICES=1 python train.py --config ./config/UNet_VOC.json >results/UNet_VOC.log 2>results/UNet_VOC.err&
+CUDA_VISIBLE_DEVICES=2 python train.py --config ./config/UNet_VOC.json >results/UNet_VOC.log 2>results/UNet_VOC.err&
+CUDA_VISIBLE_DEVICES=3 python test.py --config ./config/UNet_VOC.json --resume saved/UNetResnet_VOC/09-21_15-36/checkpoint-epoch50.pth
+
+CUDA_VISIBLE_DEVICES=1 python train.py --config ./config/SEGNet_VOC.json >results/SEGNet_VOC.log 2>results/SEGNet_VOC.err&
+
+CUDA_VISIBLE_DEVICES=1 python train.py --config ./config/DeepLab_VOC.json >results/DeepLab_VOC.log 2>results/DeepLab_VOC.err&
+
+CUDA_VISIBLE_DEVICES=2 python train.py --config ./config/FCN_VOC.json >results/FCN_VOC.log 2>results/FCN_VOC.err&
+
+
+# CITY
+CUDA_VISIBLE_DEVICES=1 python train.py --config ./config/UNet_CITY.json >results/UNet_CITY.log 2>results/UNet_CITY.err&
+CUDA_VISIBLE_DEVICES=3 python train.py --config ./config/PSPNet_CITY.json >results/PSPNet_CITY.log 2>results/PSPNet_CITY.err&
+CUDA_VISIBLE_DEVICES=1 python train.py --config ./config/DeepLab_CITY.json >results/DeepLab_CITY.log 2>results/DeepLab_CITY.err&
+CUDA_VISIBLE_DEVICES=2 python train.py --config ./config/FCN_CITY.json >results/FCN_CITY.log 2>results/FCN_CITY.err&
+CUDA_VISIBLE_DEVICES=3 python train.py --config ./config/SEGNet_CITY.json >results/SEGNet_CITY.log 2>results/SEGNet_CITY.err&
+
+# ADE20k
+CUDA_VISIBLE_DEVICES=1 python train.py --config ./config/UNet_ADE20K.json >results/UNet_ADE20K.log 2>results/UNet_ADE20K.err&
+CUDA_VISIBLE_DEVICES=2 python train.py --config ./config/FCN_ADE20K.json >results/FCN_ADE20K.log 2>results/FCN_ADE20K.err&
+CUDA_VISIBLE_DEVICES=3 python train.py --config ./config/SEGNet_ADE20K.json >results/SEGNet_ADE20K.log 2>results/SEGNet_ADE20K.err&
+
+will do:
+CUDA_VISIBLE_DEVICES=2 python train.py --config ./config/DeepLab_ADE20K.json >results/DeepLab_ADE20K.log 2>results/DeepLab_ADE20K.err&
+
+No enough GPU memory
+CUDA_VISIBLE_DEVICES=2 python train.py --config ./config/PSPNet_ADE20K.json >results/PSPNet_ADE20K.log 2>results/PSPNet_ADE20K.err&
 
 python train.py --config ./config/UNet_coco.json >results/UNet_coco.log 2>results/UNet_coco.err&
 
