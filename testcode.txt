@@ -36,6 +36,12 @@ CUDA_VISIBLE_DEVICES=2 python train.py --config ./config/PSPNet_ADE20K.json >res
 CUDA_VISIBLE_DEVICES=3 python train.py --config ./config/PSPNet_COCO.json >results/PSPNet_COCO.log 2>results/PSPNet_COCO.err&
 CUDA_VISIBLE_DEVICES=1 python train.py --config ./config/FCN_COCO.json >results/FCN_COCO.log 2>results/FCN_COCO.err&
 
+# ASE
+CUDA_VISIBLE_DEVICES=0 python test.py --config ./config/UNet_VOC.json --resume saved/UNetResnet_VOC/best/checkpoint-epoch30.pth --ensemble --s 0
+CUDA_VISIBLE_DEVICES=0 python test.py --config ./config/UNet_VOC.json --resume saved/UNetResnet_VOC/best/checkpoint-epoch40.pth --ensemble --s 1
+CUDA_VISIBLE_DEVICES=0 python test.py --config ./config/UNet_VOC.json --resume saved/UNetResnet_VOC/best/checkpoint-epoch60.pth --ensemble --s 2
+CUDA_VISIBLE_DEVICES=0 python test.py --config ./config/UNet_VOC.json --resume saved/UNetResnet_VOC/best/checkpoint-epoch70.pth --ensemble --s 3
+
 Run Error:
 CUDA_VISIBLE_DEVICES=2 python train.py --config ./config/DeepLab_COCO.json >results/DeepLab_COCO.log 2>results/DeepLab_COCO.err&
 

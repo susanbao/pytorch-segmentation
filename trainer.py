@@ -48,6 +48,7 @@ class Trainer(BaseTrainer):
 
         torch.backends.cudnn.benchmark = True
         self.output_name = config['seed']['seed']
+        self.ensemble = config["ensemble"]
 
     def _train_epoch(self, epoch):
         self.logger.info('\n')
@@ -187,12 +188,18 @@ class Trainer(BaseTrainer):
         return log
 
     def _save_feature(self, image, output, target, batch_idx, path, extend_name=None):
-        check_folder_exist(path + "image")
-        check_folder_exist(path + "output")
-        check_folder_exist(path + "target")
-        np_write(image.cpu().numpy(), path + f"image/{batch_idx}.npy")
-        np_write(output.cpu().numpy(), path + f"output/{batch_idx}.npy")
-        np_write(target.cpu().numpy(), path + f"target/{batch_idx}.npy")
+        # ASE
+        if self.ensemble:
+            check_folder_exist(path)
+            check_folder_exist(os.path.join(path, "output"))
+            np_write(output.cpu().numpy(), path + f"/output/{batch_idx}.npy")
+        else:
+            check_folder_exist(path + "image")
+            check_folder_exist(path + "output")
+            check_folder_exist(path + "target")
+            np_write(image.cpu().numpy(), path + f"image/{batch_idx}.npy")
+            np_write(output.cpu().numpy(), path + f"output/{batch_idx}.npy")
+            np_write(target.cpu().numpy(), path + f"target/{batch_idx}.npy")
 
     def _test_epoch(self):
         if self.val_loader is None:

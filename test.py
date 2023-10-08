@@ -9,7 +9,7 @@ import math
 from utils import losses
 from utils import Logger
 from utils.torchsummary import summary
-from trainer import Trainer
+from trainer import Trainer, check_folder_exist
 import ipdb
 
 def get_instance(module, name, config, *args):
@@ -21,7 +21,7 @@ def main(config, resume):
 
     # DATA LOADERS
     train_loader = get_instance(dataloaders, 'train_loader', config)
-    val_loader = get_instance(dataloaders, 'train_val_loader', config)
+    val_loader = get_instance(dataloaders, 'val_loader', config)
 
     # MODEL
     model = get_instance(models, 'arch', config, train_loader.dataset.num_classes)
@@ -53,9 +53,17 @@ if __name__=='__main__':
                         help='Path to the .pth model checkpoint to resume training')
     parser.add_argument('-d', '--device', default=None, type=str,
                            help='indices of GPUs to enable (default: all)')
+    parser.add_argument('--ensemble', action='store_true',
+                        help="Whether to store output for ASE and deep ensemble")
+    parser.add_argument("--s", default=0, type=int,
+                        help="Number of deep ensemble.")
     args = parser.parse_args()
 
     config = json.load(open(args.config))
+    config["ensemble"] = args.ensemble
+    if args.ensemble:
+        check_folder_exist(config["save_feature"]["saved_path"])
+        config["save_feature"]["saved_path"] = config["save_feature"]["saved_path"] + str(args.s)
     # if args.resume:
     #     config = torch.load(args.resume)['config']
     if args.device:

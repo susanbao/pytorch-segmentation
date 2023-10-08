@@ -90,7 +90,7 @@
 
     "save_feature": {
         "save_feature": true,
-        "saved_path": "/data/active_testing/active_testing_seg/pytorch-segmentation/pro_data/UNet_VOC/train/"
+        "saved_path": "/data/active_testing/active_testing_seg/pytorch-segmentation/pro_data/UNet_VOC_ASE/"
     },
 
     "seed": {
