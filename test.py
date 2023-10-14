@@ -16,12 +16,15 @@ def get_instance(module, name, config, *args):
     # GET THE CORRESPONDING CLASS / FCT 
     return getattr(module, config[name]['type'])(*args, **config[name]['args'])
 
-def main(config, resume):
+def main(config, resume, args):
     train_logger = Logger()
 
     # DATA LOADERS
     train_loader = get_instance(dataloaders, 'train_loader', config)
-    val_loader = get_instance(dataloaders, 'val_loader', config)
+    if args.split == "val":
+        val_loader = get_instance(dataloaders, 'val_loader', config)
+    elif args.split == "train":
+        val_loader = get_instance(dataloaders, 'train_val_loader', config)
 
     # MODEL
     model = get_instance(models, 'arch', config, train_loader.dataset.num_classes)
@@ -57,17 +60,26 @@ if __name__=='__main__':
                         help="Whether to store output for ASE and deep ensemble")
     parser.add_argument("--s", default=0, type=int,
                         help="Number of deep ensemble.")
+    parser.add_argument("--split", default="val", type=str, help='split for testing')
     args = parser.parse_args()
 
     config = json.load(open(args.config))
     config["ensemble"] = args.ensemble
+    config["save_feature"]["save_feature"] = True
     if args.ensemble:
+        base_path = "/data/active_testing/active_testing_seg/pytorch-segmentation/pro_data/" + config["name"] + "_ASE"
+        check_folder_exist(base_path)
+        config["save_feature"]["saved_path"] = os.path.join(base_path, str(args.s))
         check_folder_exist(config["save_feature"]["saved_path"])
-        config["save_feature"]["saved_path"] = config["save_feature"]["saved_path"] + str(args.s)
+    else:
+        base_path = "/data/active_testing/active_testing_seg/pytorch-segmentation/pro_data/" + config["name"]
+        check_folder_exist(base_path)
+        config["save_feature"]["saved_path"] =  os.path.join(base_path, args.split)
+        check_folder_exist(config["save_feature"]["saved_path"])
     # if args.resume:
     #     config = torch.load(args.resume)['config']
     if args.device:
         os.environ["CUDA_VISIBLE_DEVICES"] = args.device
     
     
-    main(config, args.resume)
+    main(config, args.resume, args)

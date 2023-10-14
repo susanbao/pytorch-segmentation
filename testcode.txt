@@ -1,5 +1,19 @@
 conda activate at_seg
 
+# run_data.sh
+sh run_data.sh 2 DeepLab_VOC # 50
+sh run_data.sh 2 FCN_VOC >data_logs/FCN_VOC.logs 2>data_logs/FCN_VOC.err& # 30
+sh run_data.sh 1 SEGNet_VOC >data_logs/SEGNet_VOC.logs 2>data_logs/SEGNet_VOC.err& # 30
+
+sh run_data.sh 2 PSPNet_CITY >data_logs/PSPNet_CITY.logs 2>data_logs/PSPNet_CITY.err&
+sh run_data.sh 3 SEGNet_CITY >data_logs/SEGNet_CITY.logs 2>data_logs/SEGNet_CITY.err&
+sh run_data.sh 1 UNet_CITY >data_logs/UNet_CITY.logs 2>data_logs/UNet_CITY.err&
+sh run_data.sh 2 DeepLab_CITY >data_logs/DeepLab_CITY.logs 2>data_logs/DeepLab_CITY.err&
+sh run_data.sh 3 FCN_CITY >data_logs/FCN_CITY.logs 2>data_logs/FCN_CITY.err&
+
+TODO:
+sh run_data.sh 2 PSPNet_VOC >data_logs/PSPNet_VOC.logs 2>data_logs/PSPNet_VOC.err&
+
 # VOC
 CUDA_VISIBLE_DEVICES=2 python train.py --config ./config/UNet_VOC.json >results/UNet_VOC.log 2>results/UNet_VOC.err&
 CUDA_VISIBLE_DEVICES=3 python test.py --config ./config/UNet_VOC.json --resume saved/UNetResnet_VOC/09-21_15-36/checkpoint-epoch50.pth
