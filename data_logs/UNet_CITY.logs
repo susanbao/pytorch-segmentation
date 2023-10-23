@@ -409,14 +409,14 @@ Nbr of trainable parameters: 30000464
 49
 59
 val:
-Image loss: min  0.08700836449861526,  max 1.9951000213623047
-Region 8x8 loss: min  0.0,  max 12.672239303588867
-Region 16x16 loss: min  0.0,  max 12.176398277282715
-Region 32x32 loss: min  0.0,  max 10.963000297546387
-Region 60x60 loss: min  0.0,  max 9.965950965881348
+Image loss: min  0.07949694246053696,  max 1.7984111309051514
+Region 8x8 loss: min  0.0,  max 16.58284568786621
+Region 16x16 loss: min  0.0,  max 15.995294570922852
+Region 32x32 loss: min  0.0,  max 11.739598274230957
+Region 60x60 loss: min  0.0,  max 9.991061210632324
 train:
-Image loss: min  0.05116746947169304,  max 3.1431641578674316
-Region 8x8 loss: min  0.0,  max 14.988371849060059
-Region 16x16 loss: min  0.0,  max 13.293270111083984
-Region 32x32 loss: min  0.0,  max 11.90383243560791
-Region 60x60 loss: min  0.0,  max 8.991854667663574
+Image loss: min  0.05630996823310852,  max 2.4271671772003174
+Region 8x8 loss: min  0.0,  max 13.219588279724121
+Region 16x16 loss: min  0.0,  max 12.219656944274902
+Region 32x32 loss: min  0.0,  max 10.138011932373047
+Region 60x60 loss: min  0.0,  max 9.061914443969727

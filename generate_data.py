@@ -49,8 +49,9 @@ def run_one_split(args, split):
         for i in range(samples):
             np_write(output[i], base_path + f"feature/{count}.npy")
             count += 1
-        if (file+1)%10 == 0:
-            print(file)
+        # if (file+1)%10 == 0:
+        #     print(file)
+        os.remove(base_path + f"output/{file}.npy")
             
     ## loss part
     files = os.listdir(base_path + "loss")
@@ -79,8 +80,8 @@ def run_one_split(args, split):
         true_region_32_losses = generate_region_loss(file_losses, avgpool_32, true_region_32_losses)
         true_region_60_losses = generate_region_loss(file_losses, avgpool_60, true_region_60_losses)
         
-        if (file+1)%10 == 0:
-            print(file)
+        # if (file+1)%10 == 0:
+        #     print(file)
     np_write(true_image_losses, base_path + "image_true_losses.npy")
     np_write(true_region_8_losses, base_path + "region_8_8_true_losses.npy")
     np_write(true_region_16_losses, base_path + "region_16_16_true_losses.npy")

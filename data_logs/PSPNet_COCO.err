@@ -1,0 +1,48 @@
+Detected GPUs: 1 Requested: 1
+Loading checkpoint : saved/PSPNet_COCO/best/best_model.pth
+Traceback (most recent call last):
+  File "test.py", line 85, in <module>
+    main(config, args.resume, args)
+  File "test.py", line 44, in main
+    train_logger=train_logger)
+  File "/data/active_testing/active_testing_seg/pytorch-segmentation/trainer.py", line 28, in __init__
+    super(Trainer, self).__init__(model, loss, resume, config, train_loader, val_loader, train_logger)
+  File "/data/active_testing/active_testing_seg/pytorch-segmentation/base/base_trainer.py", line 84, in __init__
+    if resume: self._resume_checkpoint(resume)
+  File "/data/active_testing/active_testing_seg/pytorch-segmentation/base/base_trainer.py", line 167, in _resume_checkpoint
+    checkpoint = torch.load(resume_path)
+  File "/home/sas20048/anaconda/envs/at_seg/lib/python3.7/site-packages/torch/serialization.py", line 699, in load
+    with _open_file_like(f, 'rb') as opened_file:
+  File "/home/sas20048/anaconda/envs/at_seg/lib/python3.7/site-packages/torch/serialization.py", line 230, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/sas20048/anaconda/envs/at_seg/lib/python3.7/site-packages/torch/serialization.py", line 211, in __init__
+    super(_open_file, self).__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: 'saved/PSPNet_COCO/best/best_model.pth'
+Detected GPUs: 1 Requested: 1
+Loading checkpoint : saved/PSPNet_COCO/best/best_model.pth
+Traceback (most recent call last):
+  File "test.py", line 85, in <module>
+    main(config, args.resume, args)
+  File "test.py", line 44, in main
+    train_logger=train_logger)
+  File "/data/active_testing/active_testing_seg/pytorch-segmentation/trainer.py", line 28, in __init__
+    super(Trainer, self).__init__(model, loss, resume, config, train_loader, val_loader, train_logger)
+  File "/data/active_testing/active_testing_seg/pytorch-segmentation/base/base_trainer.py", line 84, in __init__
+    if resume: self._resume_checkpoint(resume)
+  File "/data/active_testing/active_testing_seg/pytorch-segmentation/base/base_trainer.py", line 167, in _resume_checkpoint
+    checkpoint = torch.load(resume_path)
+  File "/home/sas20048/anaconda/envs/at_seg/lib/python3.7/site-packages/torch/serialization.py", line 699, in load
+    with _open_file_like(f, 'rb') as opened_file:
+  File "/home/sas20048/anaconda/envs/at_seg/lib/python3.7/site-packages/torch/serialization.py", line 230, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/sas20048/anaconda/envs/at_seg/lib/python3.7/site-packages/torch/serialization.py", line 211, in __init__
+    super(_open_file, self).__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: 'saved/PSPNet_COCO/best/best_model.pth'
+Traceback (most recent call last):
+  File "generate_data.py", line 106, in <module>
+    main(args)
+  File "generate_data.py", line 98, in main
+    run_one_split(args, 'val')
+  File "generate_data.py", line 30, in run_one_split
+    files = os.listdir(base_path + "target")
+FileNotFoundError: [Errno 2] No such file or directory: './pro_data/PSPNet_COCO/val/target'

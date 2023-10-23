@@ -1,18 +1,60 @@
 conda activate at_seg
 
 # run_data.sh
-sh run_data.sh 2 DeepLab_VOC # 50
-sh run_data.sh 2 FCN_VOC >data_logs/FCN_VOC.logs 2>data_logs/FCN_VOC.err& # 30
-sh run_data.sh 1 SEGNet_VOC >data_logs/SEGNet_VOC.logs 2>data_logs/SEGNet_VOC.err& # 30
+sh run_data.sh 3 UNet_VOC >data_logs/UNet_VOC.logs 2>data_logs/UNet_VOC.err& # 50 epoches
+sh run_data.sh 3 PSPNet_VOC >data_logs/PSPNet_VOC.logs 2>data_logs/PSPNet_VOC.err& # best_model
+sh run_data.sh 3 DeepLab_VOC >data_logs/DeepLab_VOC.logs 2>data_logs/DeepLab_VOC.err& # best_model
+sh run_data.sh 3 FCN_VOC >data_logs/FCN_VOC.logs 2>data_logs/FCN_VOC.err& # best_model
 
-sh run_data.sh 2 PSPNet_CITY >data_logs/PSPNet_CITY.logs 2>data_logs/PSPNet_CITY.err&
-sh run_data.sh 3 SEGNet_CITY >data_logs/SEGNet_CITY.logs 2>data_logs/SEGNet_CITY.err&
-sh run_data.sh 1 UNet_CITY >data_logs/UNet_CITY.logs 2>data_logs/UNet_CITY.err&
-sh run_data.sh 2 DeepLab_CITY >data_logs/DeepLab_CITY.logs 2>data_logs/DeepLab_CITY.err&
-sh run_data.sh 3 FCN_CITY >data_logs/FCN_CITY.logs 2>data_logs/FCN_CITY.err&
+sh run_data.sh 3 SEGNet_VOC >data_logs/SEGNet_VOC.logs 2>data_logs/SEGNet_VOC.err& # best_model
 
-TODO:
-sh run_data.sh 2 PSPNet_VOC >data_logs/PSPNet_VOC.logs 2>data_logs/PSPNet_VOC.err&
+sh run_data.sh 1 PSPNet_CITY >data_logs/PSPNet_CITY.logs 2>data_logs/PSPNet_CITY.err& # best_model
+sh run_data.sh 2 SEGNet_CITY >data_logs/SEGNet_CITY.logs 2>data_logs/SEGNet_CITY.err& # best_model
+sh run_data.sh 3 UNet_CITY >data_logs/UNet_CITY.logs 2>data_logs/UNet_CITY.err& # best_model
+sh run_data.sh 1 DeepLab_CITY >data_logs/DeepLab_CITY.logs 2>data_logs/DeepLab_CITY.err& # best_model
+sh run_data.sh 2 FCN_CITY >data_logs/FCN_CITY.logs 2>data_logs/FCN_CITY.err& # best_model
+
+sh run_data.sh 1 UNet_COCO >data_logs/UNet_COCO.logs 2>data_logs/UNet_COCO.err& # best_model
+sh run_data.sh 3 SEGNet_COCO >data_logs/SEGNet_COCO.logs 2>data_logs/SEGNet_COCO.err& # best_model
+
+### active testing
+python active_testing.py --model_data_type PSPNet_VOC --data_type image
+python active_testing.py --model_data_type DeepLab_VOC --data_type image
+python active_testing.py --model_data_type FCN_VOC --data_type image
+python active_testing.py --model_data_type SEGNet_VOC --data_type image
+
+python active_testing.py --model_data_type PSPNet_CITY --data_type image
+python active_testing.py --model_data_type UNet_CITY --data_type image
+python active_testing.py --model_data_type SEGNet_CITY --data_type image
+python active_testing.py --model_data_type DeepLab_CITY --data_type image
+python active_testing.py --model_data_type FCN_CITY --data_type image
+
+python active_testing.py --model_data_type UNet_VOC --data_type region_16
+python active_testing.py --model_data_type PSPNet_VOC --data_type region_16
+python active_testing.py --model_data_type DeepLab_VOC --data_type region_16
+python active_testing.py --model_data_type FCN_VOC --data_type region_16
+python active_testing.py --model_data_type SEGNet_VOC --data_type region_16
+
+python active_testing.py --model_data_type SEGNet_VOC --data_type region_16
+
+python active_testing.py --model_data_type PSPNet_CITY --data_type region_16
+python active_testing.py --model_data_type UNet_CITY --data_type region_16
+python active_testing.py --model_data_type SEGNet_CITY --data_type region_16
+python active_testing.py --model_data_type DeepLab_CITY --data_type region_16
+python active_testing.py --model_data_type FCN_CITY --data_type region_16
+
+python active_testing.py --model_data_type UNet_VOC --data_type region_32
+
+python active_testing.py --model_data_type PSPNet_VOC --data_type region_32
+python active_testing.py --model_data_type DeepLab_VOC --data_type region_32
+python active_testing.py --model_data_type SEGNet_VOC --data_type region_32
+python active_testing.py --model_data_type FCN_VOC --data_type region_32
+
+python active_testing.py --model_data_type PSPNet_CITY --data_type region_32
+python active_testing.py --model_data_type UNet_CITY --data_type region_32
+python active_testing.py --model_data_type DeepLab_CITY --data_type region_32
+python active_testing.py --model_data_type SEGNet_CITY --data_type region_32
+python active_testing.py --model_data_type FCN_CITY --data_type region_32
 
 # VOC
 CUDA_VISIBLE_DEVICES=2 python train.py --config ./config/UNet_VOC.json >results/UNet_VOC.log 2>results/UNet_VOC.err&

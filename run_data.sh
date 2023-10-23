@@ -2,8 +2,10 @@
 cuda=$1
 config=$2
 
-CUDA_VISIBLE_DEVICES=$cuda python test.py --split val --config ./config/$config.json --resume saved/$config/best/checkpoint-epoch30.pth
-CUDA_VISIBLE_DEVICES=$cuda python test.py --split train --config ./config/$config.json --resume saved/$config/best/checkpoint-epoch30.pth
+# CUDA_VISIBLE_DEVICES=$cuda python test.py --split val --config ./config/$config.json --resume saved/$config/best/checkpoint-epoch30.pth
+# CUDA_VISIBLE_DEVICES=$cuda python test.py --split train --config ./config/$config.json --resume saved/$config/best/checkpoint-epoch30.pth
+CUDA_VISIBLE_DEVICES=$cuda python test.py --split val --config ./config/$config.json --resume saved/$config/best/best_model.pth
+CUDA_VISIBLE_DEVICES=$cuda python test.py --split train --config ./config/$config.json --resume saved/$config/best/best_model.pth
 
 CUDA_VISIBLE_DEVICES=$cuda python generate_data.py --model_type $config
 

@@ -189,7 +189,7 @@ def main(args):
         for train_step in step_list:
             expected_losses = np.array(read_one_results(vit_base_path + f"ViT_{model_dataset}_region_32_32_losses_{train_step}.json")['losses']).squeeze()
             file_path = result_json_path + f"ViT_region_runs_{train_step}.json"
-            active_testing(file_path, true_losses, expected_losses, "ViT region", sample_size_set, display=True)
+            active_testing(file_path, true_losses, expected_losses, "ViT region 32", sample_size_set, display=True)
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
