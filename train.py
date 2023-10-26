@@ -55,9 +55,12 @@ if __name__=='__main__':
                         help='Path to the .pth model checkpoint to resume training')
     parser.add_argument('-d', '--device', default=None, type=str,
                            help='indices of GPUs to enable (default: all)')
+    parser.add_argument('--ensemble', action='store_true',
+                        help="Whether to store output for ASE and deep ensemble")
     args = parser.parse_args()
 
     config = json.load(open(args.config))
+    config["ensemble"] = args.ensemble
     if args.resume:
         config = torch.load(args.resume)['config']
     if args.device:
