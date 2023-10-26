@@ -12,8 +12,8 @@ import copy
 import random
 from utils.utils import *
 
-# random_seed_set = [4519, 9524, 5901, 1028, 6382, 5383, 5095, 7635,  890,  608]
-random_seed_set = [4519, 9524, 5901]
+random_seed_set = [4519, 9524, 5901, 1028, 6382, 5383, 5095, 7635,  890,  608]
+# random_seed_set = [4519, 9524, 5901]
 
 def LURE_weights_for_risk_estimator(weights, N):
     M = weights.size
@@ -107,47 +107,49 @@ def main(args):
     model_dataset = args.model_data_type
     base_path = f"./pro_data/{model_dataset}/{split}/"
     data_type = args.data_type # image, region_8, region_16
-    check_folder_exist(f"./results/{model_dataset}")
+    store_main_folder = "runs_10"
+    check_folder_exist(f"./results/{store_main_folder}/{model_dataset}")
     if data_type == "image":
         true_losses = np_read(base_path + "image_true_losses.npy")
-        sample_size_precentage = [0.001, 0.002, 0.003, 0.004, 0.005, 0.006, 0.007, 0.008, 0.009, 0.01, 0.015, 0.02, 0.025, 0.03, 0.035, 0.04, 0.045,
-                              0.05, 0.055, 0.06, 0.065, 0.07, 0.075, 0.08]
-        result_json_path = f"./results/{model_dataset}/image_based_active_testing/"
+        # sample_size_precentage = [0.001, 0.002, 0.003, 0.004, 0.005, 0.006, 0.007, 0.008, 0.009, 0.01, 0.015, 0.02, 0.025, 0.03, 0.035, 0.04, 0.045,
+        #                       0.05, 0.055, 0.06, 0.065, 0.07, 0.075, 0.08]
+        sample_size_precentage = np.linspace(0.01, 0.8, 20)
+        result_json_path = f"./results/{store_main_folder}/{model_dataset}/image_based_active_testing/"
         vit_base_path = "../ViT-pytorch/output/"
     if data_type == "image_2":
         true_losses = np_read(base_path + "image_split_2_2_true_losses.npy")
         sample_size_precentage = [0.001, 0.002, 0.003, 0.004, 0.005, 0.006, 0.007, 0.008, 0.009, 0.01, 0.015, 0.02, 0.025, 0.03, 0.035, 0.04, 0.045,
                               0.05, 0.055, 0.06, 0.065, 0.07, 0.075, 0.08]
-        result_json_path = f"./results/{model_dataset}/image_split_2_2_active_testing/"
+        result_json_path = f"./results/{store_main_folder}/{model_dataset}/image_split_2_2_active_testing/"
         vit_base_path = "../ViT-pytorch/output/"
     elif data_type == "region_8":
         true_losses = np_read(base_path + "region_8_8_true_losses.npy")
         sample_size_precentage = np.linspace(0.00001, 0.0001, 20)
-        # sample_size_precentage = np.linspace(0.00004, 0.00006, 20)
-        # sample_size_precentage = np.linspace(0.00001, 0.00005, 2)
-        result_json_path = f"./results/{model_dataset}/region_8_8_active_testing/"
+        result_json_path = f"./results/{store_main_folder}/{model_dataset}/region_8_8_active_testing/"
         # result_json_path = "./results/region_8_8_try/"
         vit_base_path = "../ViT-pytorch/output/region_8_8/"
     elif data_type == "region_16":
         true_losses = np_read(base_path + "region_16_16_true_losses.npy")
-        sample_size_precentage = np.linspace(0.0001, 0.001, 20)
-        result_json_path = f"./results/{model_dataset}/region_16_16_active_testing/"
+        # sample_size_precentage = np.linspace(0.0001, 0.001, 20)
+        sample_size_precentage = np.linspace(0.0002, 0.001, 20)
+        result_json_path = f"./results/{store_main_folder}/{model_dataset}/region_16_16_active_testing/"
         # vit_base_path = "../ViT-pytorch/output/region_16_16/"
         vit_base_path = "../ViT-pytorch/output/"
     elif data_type == "region_60":
         true_losses = np_read(base_path + "region_60_60_true_losses.npy")
         sample_size_precentage = np.linspace(0.0001, 0.001, 20)
-        result_json_path = f"./results/{model_dataset}/region_60_60_active_testing/"
+        result_json_path = f"./results/{store_main_folder}/{model_dataset}/region_60_60_active_testing/"
         vit_base_path = "../ViT-pytorch/output/"
     elif data_type == "region_30":
         true_losses = np_read(base_path + "region_30_30_true_losses.npy")
         sample_size_precentage = np.linspace(0.0001, 0.001, 20)
-        result_json_path = f"./results/{model_dataset}/region_30_30_active_testing/"
+        result_json_path = f"./results/{store_main_folder}/{model_dataset}/region_30_30_active_testing/"
         vit_base_path = "../ViT-pytorch/output/"
     elif data_type == "region_32":
         true_losses = np_read(base_path + "region_32_32_true_losses.npy")
-        sample_size_precentage = np.linspace(0.0001, 0.001, 20)
-        result_json_path = f"./results/{model_dataset}/region_32_32_active_testing/"
+        # sample_size_precentage = np.linspace(0.0001, 0.001, 20)
+        sample_size_precentage = np.linspace(0.0002, 0.001, 20)
+        result_json_path = f"./results/{store_main_folder}/{model_dataset}/region_32_32_active_testing/"
         vit_base_path = "../ViT-pytorch/output/"
 
     check_folder_exist(result_json_path)
@@ -184,12 +186,12 @@ def main(args):
         for train_step in step_list:
             expected_losses = np.array(read_one_results(vit_base_path + f"ViT_{model_dataset}_region_losses_{train_step}.json")['losses']).squeeze()
             file_path = result_json_path + f"ViT_region_runs_{train_step}.json"
-            active_testing(file_path, true_losses, expected_losses, "ViT region", sample_size_set, display=True)
+            active_testing(file_path, true_losses, expected_losses, "ViT region", sample_size_set, display=False)
     elif data_type == "region_32":
         for train_step in step_list:
             expected_losses = np.array(read_one_results(vit_base_path + f"ViT_{model_dataset}_region_32_32_losses_{train_step}.json")['losses']).squeeze()
             file_path = result_json_path + f"ViT_region_runs_{train_step}.json"
-            active_testing(file_path, true_losses, expected_losses, "ViT region 32", sample_size_set, display=True)
+            active_testing(file_path, true_losses, expected_losses, "ViT region 32", sample_size_set, display=False)
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -201,3 +203,4 @@ if __name__ == "__main__":
                         help="val/train")
     args = parser.parse_args()
     main(args)
+    print(f"Complete {args.model_data_type} {args.data_type}")

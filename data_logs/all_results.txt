@@ -152,3 +152,31 @@ Region 16x16 loss: min  0.0,  max 47.504547119140625
 Region 32x32 loss: min  0.0,  max 34.08951950073242
 Region 60x60 loss: min  0.0,  max 23.586450576782227
 
+PSPNet_COCO:
+val:
+Image loss: min  0.00027431861963123083,  max 14.403605461120605
+Region 8x8 loss: min  0.0,  max 22.060091018676758
+Region 16x16 loss: min  0.0,  max 21.813671112060547
+Region 32x32 loss: min  0.0,  max 21.341838836669922
+Region 60x60 loss: min  0.0,  max 20.180408477783203
+train:
+Image loss: min  0.0,  max 1.7420445680618286
+Region 8x8 loss: min  0.0,  max 20.7941951751709
+Region 16x16 loss: min  0.0,  max 19.66218376159668
+Region 32x32 loss: min  0.0,  max 13.911565780639648
+Region 60x60 loss: min  0.0,  max 12.810193061828613
+
+FCN_COCO:
+val:
+Image loss: min  3.9183887565741315e-05,  max 11.010282516479492
+Region 8x8 loss: min  0.0,  max 26.99115562438965
+Region 16x16 loss: min  0.0,  max 26.838804244995117
+Region 32x32 loss: min  0.0,  max 25.40224266052246
+Region 60x60 loss: min  0.0,  max 21.988245010375977
+train:
+Image loss: min  0.0,  max 2.5797924995422363
+Region 8x8 loss: min  0.0,  max 33.321929931640625
+Region 16x16 loss: min  0.0,  max 25.360567092895508
+Region 32x32 loss: min  0.0,  max 13.688148498535156
+Region 60x60 loss: min  0.0,  max 12.49459171295166
+

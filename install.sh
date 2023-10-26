@@ -1,7 +1,7 @@
 # cd /workspace/pytorch-segmentation
 git config --global user.email "susannju@163.com"
 git config --global user.name "susanbao"
-git remote set-url origin https://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@github.com/susanbao/pytorch-segmentation.git
+git remote set-url origin https://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@github.com/susanbao/pytorch-segmentation.git
 
 pip install ipdb wandb Cython scipy future scikit-learn scikit-image requests pandas matplotlib seaborn ml-collections packaging
 apt-get install libsm6 libxrender1 libfontconfig1 libxext6
