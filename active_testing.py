@@ -12,8 +12,8 @@ import copy
 import random
 from utils.utils import *
 
-random_seed_set = [4519, 9524, 5901, 1028, 6382, 5383, 5095, 7635,  890,  608]
-# random_seed_set = [4519, 9524, 5901]
+# random_seed_set = [4519, 9524, 5901, 1028, 6382, 5383, 5095, 7635,  890,  608]
+random_seed_set = [4519, 9524, 5901]
 
 def LURE_weights_for_risk_estimator(weights, N):
     M = weights.size
@@ -107,13 +107,13 @@ def main(args):
     model_dataset = args.model_data_type
     base_path = f"./pro_data/{model_dataset}/{split}/"
     data_type = args.data_type # image, region_8, region_16
-    store_main_folder = "runs_10"
+    store_main_folder = "runs_3"
     check_folder_exist(f"./results/{store_main_folder}/{model_dataset}")
     if data_type == "image":
         true_losses = np_read(base_path + "image_true_losses.npy")
         # sample_size_precentage = [0.001, 0.002, 0.003, 0.004, 0.005, 0.006, 0.007, 0.008, 0.009, 0.01, 0.015, 0.02, 0.025, 0.03, 0.035, 0.04, 0.045,
         #                       0.05, 0.055, 0.06, 0.065, 0.07, 0.075, 0.08]
-        sample_size_precentage = np.linspace(0.01, 0.8, 20)
+        sample_size_precentage = np.linspace(0.01, 0.08, 20)
         result_json_path = f"./results/{store_main_folder}/{model_dataset}/image_based_active_testing/"
         vit_base_path = "../ViT-pytorch/output/"
     if data_type == "image_2":
@@ -177,21 +177,48 @@ def main(args):
         json.dump(json_object, outfile)
     
     step_list = {5000,10000,15000,20000}
+    # step_list = {5000,10000}
+    
+    ase_store_path = f"./ase_results/{model_dataset}/"
     if data_type == "image":
         for train_step in step_list:
             val_estimated_loss = np.array(read_one_results(f"../ViT-pytorch/output/ViT_{model_dataset}_all_losses_{train_step}.json")['losses'])
             file_path = result_json_path + f"ViT_all_runs_{train_step}.json"
             active_testing(file_path, true_losses, val_estimated_loss, "ViT all", sample_size_set)
+        at_losses = np_read(ase_store_path + f"AT_{model_dataset}_image_Q.npy")
+        file_path = result_json_path + f"AT_runs.json"
+        active_testing(file_path, true_losses, at_losses, "AT image", sample_size_set)
+        
+        ase_losses = np_read(ase_store_path + f"ASE_{model_dataset}_image_Q.npy")
+        file_path = result_json_path + f"ASE_runs.json"
+        active_testing(file_path, true_losses, ase_losses, "ASE image", sample_size_set)
     elif data_type == "region_16":
         for train_step in step_list:
             expected_losses = np.array(read_one_results(vit_base_path + f"ViT_{model_dataset}_region_losses_{train_step}.json")['losses']).squeeze()
             file_path = result_json_path + f"ViT_region_runs_{train_step}.json"
             active_testing(file_path, true_losses, expected_losses, "ViT region", sample_size_set, display=False)
+            
+        at_losses = np_read(ase_store_path + f"AT_{model_dataset}_region_16_Q.npy")
+        file_path = result_json_path + f"AT_runs.json"
+        active_testing(file_path, true_losses, at_losses, "AT region", sample_size_set)
+        
+        ase_losses = np_read(ase_store_path + f"ASE_{model_dataset}_region_16_Q.npy")
+        file_path = result_json_path + f"ASE_runs.json"
+        active_testing(file_path, true_losses, ase_losses, "ASE region", sample_size_set)
     elif data_type == "region_32":
         for train_step in step_list:
             expected_losses = np.array(read_one_results(vit_base_path + f"ViT_{model_dataset}_region_32_32_losses_{train_step}.json")['losses']).squeeze()
             file_path = result_json_path + f"ViT_region_runs_{train_step}.json"
             active_testing(file_path, true_losses, expected_losses, "ViT region 32", sample_size_set, display=False)
+            
+        at_losses = np_read(ase_store_path + f"AT_{model_dataset}_region_32_Q.npy")
+        file_path = result_json_path + f"AT_runs.json"
+        active_testing(file_path, true_losses, at_losses, "AT region 32", sample_size_set)
+        
+        ase_losses = np_read(ase_store_path + f"ASE_{model_dataset}_region_32_Q.npy")
+        file_path = result_json_path + f"ASE_runs.json"
+        active_testing(file_path, true_losses, ase_losses, "ASE region 32", sample_size_set)
+            
     
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

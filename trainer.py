@@ -190,8 +190,11 @@ class Trainer(BaseTrainer):
     def _save_feature(self, image, output, target, batch_idx, path, extend_name=None):
         # ASE
         if self.ensemble:
-            check_folder_exist(os.path.join(path, "output"))
-            np_write(output.cpu().numpy(), path + f"/output/{batch_idx}.npy")
+            np_write(output.cpu().numpy(), path + f"/{batch_idx}.npy")
+            if path[-1] == "0":
+                base_path = path[:-2]
+                check_folder_exist(os.path.join(base_path, "target"))
+                np_write(target.cpu().numpy(), os.path.join(base_path, f"target/{batch_idx}.npy"))
         else:
             check_folder_exist(os.path.join(path, "image"))
             check_folder_exist(os.path.join(path, "output"))

@@ -112,6 +112,7 @@ pro_data/
 ckpts/
 results/
 wandb/
+ase_results/
 
 # editor, os cache directory
 .vscode/

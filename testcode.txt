@@ -1,5 +1,16 @@
 conda activate at_seg
 
+# run active_testing for ASE
+sh active_testing_ase.sh 3 PSPNet_VOC >results/active_testing_ase.logs 2>results/active_testing_ase.err&
+sh active_testing_ase.sh 1 UNet_VOC >results/active_testing_ase.logs 2>results/active_testing_ase.err&
+sh active_testing_ase.sh 1 SEGNet_VOC >results/active_testing_ase.logs 2>results/active_testing_ase.err&
+sh active_testing_ase.sh 1 FCN_VOC >results/active_testing_ase.logs 2>results/active_testing_ase.err&
+
+sh active_testing_ase.sh 2 PSPNet_CITY >results/active_testing_ase_2.logs 2>results/active_testing_ase_2.err&
+sh active_testing_ase.sh 2 UNet_CITY >results/active_testing_ase_2.logs 2>results/active_testing_ase_2.err&
+sh active_testing_ase.sh 2 SEGNet_CITY >results/active_testing_ase_2.logs 2>results/active_testing_ase_2.err&
+sh active_testing_ase.sh 2 FCN_CITY >results/active_testing_ase_2.logs 2>results/active_testing_ase_2.err&
+
 # run_data.sh
 sh run_data.sh 3 UNet_VOC >data_logs/UNet_VOC.logs 2>data_logs/UNet_VOC.err& # 50 epoches
 sh run_data.sh 3 PSPNet_VOC >data_logs/PSPNet_VOC.logs 2>data_logs/PSPNet_VOC.err& # best_model
@@ -34,6 +45,8 @@ python active_testing.py --model_data_type UNet_CITY --data_type image
 python active_testing.py --model_data_type SEGNet_CITY --data_type image
 python active_testing.py --model_data_type DeepLab_CITY --data_type image
 python active_testing.py --model_data_type FCN_CITY --data_type image
+
+python active_testing.py --model_data_type UNet_COCO --data_type image
 
 python active_testing.py --model_data_type UNet_VOC --data_type region_16
 python active_testing.py --model_data_type PSPNet_VOC --data_type region_16
