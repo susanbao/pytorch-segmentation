@@ -40,9 +40,8 @@ def acquire(expected_loss_inputs, samples_num):
         expected_loss += np.abs(expected_loss.min())
     
     if np.any(np.isnan(expected_loss)):
-        logging.warning(
-            'Found NaN values in expected loss, replacing with 0.')
-        logging.info(f'{expected_loss}')
+        print('Found NaN values in expected loss, replacing with 0.')
+        # print(f'{expected_loss}')
         expected_loss = np.nan_to_num(expected_loss, nan=0)
     pick_sample_idxs = np.zeros((samples_num), dtype = int)
     idx_array = np.arange(expected_loss.size)

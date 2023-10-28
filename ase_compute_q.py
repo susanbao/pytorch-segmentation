@@ -75,14 +75,21 @@ def main(args):
     ego_output_path =  base_path + "0"
     file_list = os.listdir(ego_output_path)
     file_num = len(file_list)
+    eps = 1e-19
     
     for file in range(file_num):
         ego_output = np_read(os.path.join(ego_output_path,f"{file}.npy"))
         ego_output = softmax(ego_output)
+        ego_output = np.nan_to_num(ego_output, nan=eps)
+        ego_output = np.clip(ego_output, eps, 1-eps)
+        ego_output = ego_output / ego_output.sum(axis=1, keepdims=True)
         dropout_output = np.expand_dims(np.copy(ego_output), axis=0)
         for output_path in output_list:
             temp_output = np_read(os.path.join(output_path,f"{file}.npy"))
             temp_output = softmax(temp_output)
+            temp_output = np.nan_to_num(temp_output, nan=eps)
+            temp_output = np.clip(temp_output, eps, 1-eps)
+            temp_output = temp_output / temp_output.sum(axis=1, keepdims=True)
             dropout_output = np.concatenate((dropout_output, np.expand_dims(np.copy(temp_output), axis=0)), axis=0)
 
         compute_active_testing_losses(ego_output, dropout_output)

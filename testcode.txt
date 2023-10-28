@@ -11,6 +11,16 @@ sh active_testing_ase.sh 2 UNet_CITY >results/active_testing_ase_2.logs 2>result
 sh active_testing_ase.sh 2 SEGNet_CITY >results/active_testing_ase_2.logs 2>results/active_testing_ase_2.err&
 sh active_testing_ase.sh 2 FCN_CITY >results/active_testing_ase_2.logs 2>results/active_testing_ase_2.err&
 
+sh active_testing_ase.sh 2 UNet_COCO >results/active_testing_ase_2.logs 2>results/active_testing_ase_2.err&
+sh active_testing_ase.sh 2 SEGNet_COCO >results/active_testing_ase_2.logs 2>results/active_testing_ase_2.err&
+sh active_testing_ase.sh 2 PSPNet_COCO >results/active_testing_ase_2.logs 2>results/active_testing_ase_2.err&
+sh active_testing_ase.sh 2 FCN_COCO >results/active_testing_ase_2.logs 2>results/active_testing_ase_2.err&
+
+sh active_testing_ase.sh 1 UNet_ADE20K >results/active_testing_ase.logs 2>results/active_testing_ase.err&
+sh active_testing_ase.sh 1 SEGNet_ADE20K >results/active_testing_ase.logs 2>results/active_testing_ase.err&
+sh active_testing_ase.sh 1 FCN_ADE20K >results/active_testing_ase.logs 2>results/active_testing_ase.err&
+sh active_testing_ase.sh 1 PSPNet_ADE20K >results/active_testing_ase.logs 2>results/active_testing_ase.err&
+
 # run_data.sh
 sh run_data.sh 3 UNet_VOC >data_logs/UNet_VOC.logs 2>data_logs/UNet_VOC.err& # 50 epoches
 sh run_data.sh 3 PSPNet_VOC >data_logs/PSPNet_VOC.logs 2>data_logs/PSPNet_VOC.err& # best_model
