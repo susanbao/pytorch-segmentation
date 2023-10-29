@@ -176,7 +176,7 @@ def main(args):
         json.dump(json_object, outfile)
     
     step_list = {5000,10000,15000,20000}
-    # step_list = {5000,10000}
+    # step_list = {5000,15000}
     
     ase_store_path = f"./ase_results/{model_dataset}/"
     if data_type == "image":

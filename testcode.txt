@@ -12,11 +12,11 @@ sh active_testing_ase.sh 2 SEGNet_CITY >results/active_testing_ase_2.logs 2>resu
 sh active_testing_ase.sh 2 FCN_CITY >results/active_testing_ase_2.logs 2>results/active_testing_ase_2.err&
 
 sh active_testing_ase.sh 2 UNet_COCO >results/active_testing_ase_2.logs 2>results/active_testing_ase_2.err&
-sh active_testing_ase.sh 2 SEGNet_COCO >results/active_testing_ase_2.logs 2>results/active_testing_ase_2.err&
+sh active_testing_ase.sh 1 SEGNet_COCO >results/active_testing_ase_2.logs 2>results/active_testing_ase_2.err&
 sh active_testing_ase.sh 2 PSPNet_COCO >results/active_testing_ase_2.logs 2>results/active_testing_ase_2.err&
-sh active_testing_ase.sh 2 FCN_COCO >results/active_testing_ase_2.logs 2>results/active_testing_ase_2.err&
+sh active_testing_ase.sh 2 FCN_COCO >results/active_testing_ase.logs 2>results/active_testing_ase.err&
 
-sh active_testing_ase.sh 1 UNet_ADE20K >results/active_testing_ase.logs 2>results/active_testing_ase.err&
+sh active_testing_ase.sh 2 UNet_ADE20K >results/active_testing_ase.logs 2>results/active_testing_ase.err&
 sh active_testing_ase.sh 1 SEGNet_ADE20K >results/active_testing_ase.logs 2>results/active_testing_ase.err&
 sh active_testing_ase.sh 1 FCN_ADE20K >results/active_testing_ase.logs 2>results/active_testing_ase.err&
 sh active_testing_ase.sh 1 PSPNet_ADE20K >results/active_testing_ase.logs 2>results/active_testing_ase.err&
@@ -41,6 +41,7 @@ sh run_data.sh 1 PSPNet_COCO >data_logs/PSPNet_COCO.logs 2>data_logs/PSPNet_COCO
 sh run_data.sh 0 FCN_COCO >data_logs/FCN_COCO.logs 2>data_logs/FCN_COCO.err& # best_model
 
 sh run_data.sh 0 UNet_ADE20K >data_logs/UNet_ADE20K.logs 2>data_logs/UNet_ADE20K.err& # best_model
+sh run_data.sh 0 PSPNet_ADE20K >data_logs/PSPNet_ADE20K.logs 2>data_logs/PSPNet_ADE20K.err& # best_model
 
 ### active testing
 sh active_testing.sh >results/active_testing.logs 2>results/active_testing.err&
@@ -97,8 +98,9 @@ CUDA_VISIBLE_DEVICES=1 python train.py --config ./config/PSPNet_VOC.json >result
 # COCO10K
 CUDA_VISIBLE_DEVICES=1 python train.py --config ./config/UNet_COCO.json >results/UNet_COCO.log 2>results/UNet_COCO.err&
 CUDA_VISIBLE_DEVICES=1 python test.py --config ./config/UNet_COCO.json --resume saved/UNetResnet/coco10k/best_model.pth
-
 CUDA_VISIBLE_DEVICES=3 python train.py --config ./config/SEGNet_COCO.json >results/SEGNet_COCO.log 2>results/SEGNet_COCO.err&
+CUDA_VISIBLE_DEVICES=1 python train.py --config ./config/PSPNet_COCO.json >results/PSPNet_COCO.log 2>results/PSPNet_COCO.err&
+CUDA_VISIBLE_DEVICES=0 python train.py --config ./config/FCN_COCO.json >results/FCN_COCO.log 2>results/FCN_COCO.err&
 
 # CITY
 CUDA_VISIBLE_DEVICES=1 python train.py --config ./config/UNet_CITY.json >results/UNet_CITY.log 2>results/UNet_CITY.err&
@@ -114,9 +116,7 @@ CUDA_VISIBLE_DEVICES=3 python train.py --config ./config/SEGNet_ADE20K.json >res
 CUDA_VISIBLE_DEVICES=3 python train.py --config ./config/DeepLab_ADE20K.json >results/DeepLab_ADE20K.log 2>results/DeepLab_ADE20K.err&
 
 No enough GPU memory
-CUDA_VISIBLE_DEVICES=2 python train.py --config ./config/PSPNet_ADE20K.json >results/PSPNet_ADE20K.log 2>results/PSPNet_ADE20K.err&
-CUDA_VISIBLE_DEVICES=1 python train.py --config ./config/PSPNet_COCO.json >results/PSPNet_COCO.log 2>results/PSPNet_COCO.err&
-CUDA_VISIBLE_DEVICES=0 python train.py --config ./config/FCN_COCO.json >results/FCN_COCO.log 2>results/FCN_COCO.err&
+CUDA_VISIBLE_DEVICES=0 python train.py --config ./config/PSPNet_ADE20K.json >results/PSPNet_ADE20K.log 2>results/PSPNet_ADE20K.err&
 
 # ASE
 CUDA_VISIBLE_DEVICES=0 python test.py --config ./config/UNet_VOC.json --resume saved/UNetResnet_VOC/best/checkpoint-epoch30.pth --ensemble --s 0

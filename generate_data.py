@@ -28,7 +28,10 @@ def display_range_of_losses(losses, loss_type):
 def run_one_split(args, split):
     base_path = "./pro_data/" + args.model_type + "/" + split + "/"
     files = os.listdir(base_path + "target")
-    cross_entropy_loss_func = losses.CrossEntropyLoss2d(reduction="none")
+    if args.model_type[-1] == "K": # ADE20K use the -1 as ignore index
+        cross_entropy_loss_func = losses.CrossEntropyLoss2d(reduction="none", ignore_index = -1)
+    else:
+        cross_entropy_loss_func = losses.CrossEntropyLoss2d(reduction="none")
     file_count = len(files)
     check_folder_exist(base_path + "loss")
     check_folder_exist(base_path + "entropy")
