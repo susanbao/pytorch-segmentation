@@ -104,7 +104,11 @@ def main(args):
     split = args.split
     # PSPNet_VOC, UNet_COCO10k, UNet_VOC, DeepLab_VOC, FCN_VOC, SEGNet_VOC, PSPNet_CITY
     model_dataset = args.model_data_type
-    base_path = f"./pro_data/{model_dataset}/{split}/"
+    if model_dataset[-1] == "0":
+        model_origin_folder = model_dataset[:-3]
+    else:
+        model_origin_folder = model_dataset
+    base_path = f"./pro_data/{model_origin_folder}/{split}/"
     data_type = args.data_type # image, region_8, region_16
     store_main_folder = "runs_3"
     check_folder_exist(f"./results/{store_main_folder}/{model_dataset}")
@@ -178,17 +182,17 @@ def main(args):
     step_list = {5000,10000,15000,20000}
     # step_list = {5000,15000}
     
-    ase_store_path = f"./ase_results/{model_dataset}/"
+    ase_store_path = f"./ase_results/{model_origin_folder}/"
     if data_type == "image":
         for train_step in step_list:
             val_estimated_loss = np.array(read_one_results(f"../ViT-pytorch/output/ViT_{model_dataset}_all_losses_{train_step}.json")['losses'])
             file_path = result_json_path + f"ViT_all_runs_{train_step}.json"
             active_testing(file_path, true_losses, val_estimated_loss, "ViT all", sample_size_set)
-        at_losses = np_read(ase_store_path + f"AT_{model_dataset}_image_Q.npy")
+        at_losses = np_read(ase_store_path + f"AT_{model_origin_folder}_image_Q.npy")
         file_path = result_json_path + f"AT_runs.json"
         active_testing(file_path, true_losses, at_losses, "AT image", sample_size_set)
         
-        ase_losses = np_read(ase_store_path + f"ASE_{model_dataset}_image_Q.npy")
+        ase_losses = np_read(ase_store_path + f"ASE_{model_origin_folder}_image_Q.npy")
         file_path = result_json_path + f"ASE_runs.json"
         active_testing(file_path, true_losses, ase_losses, "ASE image", sample_size_set)
     elif data_type == "region_16":
@@ -197,11 +201,11 @@ def main(args):
             file_path = result_json_path + f"ViT_region_runs_{train_step}.json"
             active_testing(file_path, true_losses, expected_losses, "ViT region", sample_size_set, display=False)
             
-        at_losses = np_read(ase_store_path + f"AT_{model_dataset}_region_16_Q.npy")
+        at_losses = np_read(ase_store_path + f"AT_{model_origin_folder}_region_16_Q.npy")
         file_path = result_json_path + f"AT_runs.json"
         active_testing(file_path, true_losses, at_losses, "AT region", sample_size_set)
         
-        ase_losses = np_read(ase_store_path + f"ASE_{model_dataset}_region_16_Q.npy")
+        ase_losses = np_read(ase_store_path + f"ASE_{model_origin_folder}_region_16_Q.npy")
         file_path = result_json_path + f"ASE_runs.json"
         active_testing(file_path, true_losses, ase_losses, "ASE region", sample_size_set)
     elif data_type == "region_32":
@@ -210,11 +214,11 @@ def main(args):
             file_path = result_json_path + f"ViT_region_runs_{train_step}.json"
             active_testing(file_path, true_losses, expected_losses, "ViT region 32", sample_size_set, display=False)
             
-        at_losses = np_read(ase_store_path + f"AT_{model_dataset}_region_32_Q.npy")
+        at_losses = np_read(ase_store_path + f"AT_{model_origin_folder}_region_32_Q.npy")
         file_path = result_json_path + f"AT_runs.json"
         active_testing(file_path, true_losses, at_losses, "AT region 32", sample_size_set)
         
-        ase_losses = np_read(ase_store_path + f"ASE_{model_dataset}_region_32_Q.npy")
+        ase_losses = np_read(ase_store_path + f"ASE_{model_origin_folder}_region_32_Q.npy")
         file_path = result_json_path + f"ASE_runs.json"
         active_testing(file_path, true_losses, ase_losses, "ASE region 32", sample_size_set)
             
