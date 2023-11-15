@@ -180,3 +180,58 @@ Region 16x16 loss: min  0.0,  max 25.360567092895508
 Region 32x32 loss: min  0.0,  max 13.688148498535156
 Region 60x60 loss: min  0.0,  max 12.49459171295166
 
+PSPNet_ADE20K:
+val:
+Image loss: min  0.0016273555811494589,  max 6.863824367523193
+Region 8x8 loss: min  0.0,  max 18.4194393157959
+Region 16x16 loss: min  0.0,  max 17.974679946899414
+Region 32x32 loss: min  0.0,  max 15.8788480758667
+Region 60x60 loss: min  0.0,  max 14.165567398071289
+train:
+Image loss: min  0.0,  max 3.4933347702026367
+Region 8x8 loss: min  0.0,  max 21.165382385253906
+Region 16x16 loss: min  0.0,  max 20.21710777282715
+Region 32x32 loss: min  0.0,  max 17.86827850341797
+Region 60x60 loss: min  0.0,  max 14.094663619995117
+
+UNet_ADE20K:
+val:
+Image loss: min  0.0020823634695261717,  max 6.991391658782959
+Region 8x8 loss: min  0.0,  max 69.79499816894531
+Region 16x16 loss: min  0.0,  max 68.77002716064453
+Region 32x32 loss: min  0.0,  max 51.546722412109375
+Region 60x60 loss: min  0.0,  max 33.44350051879883
+train:
+Image loss: min  0.0,  max 8.349489212036133
+Region 8x8 loss: min  0.0,  max 69.02766418457031
+Region 16x16 loss: min  0.0,  max 65.48529052734375
+Region 32x32 loss: min  0.0,  max 56.915367126464844
+Region 60x60 loss: min  0.0,  max 45.09724807739258
+
+SEGNet_ADE20K:
+val:
+Image loss: min  0.002382395789027214,  max 11.667722702026367
+Region 8x8 loss: min  0.0,  max 53.37614440917969
+Region 16x16 loss: min  0.0,  max 43.76133346557617
+Region 32x32 loss: min  0.0,  max 42.768917083740234
+Region 60x60 loss: min  0.0,  max 35.187171936035156
+train:
+Image loss: min  0.0,  max 3.615013837814331
+Region 8x8 loss: min  0.0,  max 60.50611877441406
+Region 16x16 loss: min  0.0,  max 41.33127212524414
+Region 32x32 loss: min  0.0,  max 37.5732307434082
+Region 60x60 loss: min  0.0,  max 24.11772346496582
+
+FCN_ADE20K:
+val:
+Image loss: min  0.0022081793285906315,  max 7.688706398010254
+Region 8x8 loss: min  0.0,  max 28.424585342407227
+Region 16x16 loss: min  0.0,  max 26.184921264648438
+Region 32x32 loss: min  0.0,  max 24.558441162109375
+Region 60x60 loss: min  0.0,  max 21.95546531677246
+train:
+Image loss: min  0.0,  max 3.336280107498169
+Region 8x8 loss: min  0.0,  max 31.46367073059082
+Region 16x16 loss: min  0.0,  max 19.362289428710938
+Region 32x32 loss: min  0.0,  max 14.789145469665527
+Region 60x60 loss: min  0.0,  max 13.933645248413086

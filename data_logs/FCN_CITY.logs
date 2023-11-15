@@ -110,24 +110,12 @@ FCN8(
 )
 Nbr of trainable parameters: 134353017
 
-9
-19
-29
-39
-49
-59
-9
-19
-29
-39
-49
-59
 val:
 Image loss: min  0.04765894263982773,  max 1.5487160682678223
 Region 8x8 loss: min  0.0,  max 16.87504768371582
 Region 16x16 loss: min  0.0,  max 16.633399963378906
 Region 32x32 loss: min  0.0,  max 16.168292999267578
-Region 60x60 loss: min  0.0,  max 14.689199447631836
+Region 60x60 loss: min  0.0,  max 14.68919849395752
 train:
 Image loss: min  0.04520300403237343,  max 0.7757745981216431
 Region 8x8 loss: min  0.0,  max 14.478336334228516

@@ -17,9 +17,9 @@ sh active_testing_ase.sh 2 PSPNet_COCO >results/active_testing_ase_2.logs 2>resu
 sh active_testing_ase.sh 2 FCN_COCO >results/active_testing_ase.logs 2>results/active_testing_ase.err&
 
 sh active_testing_ase.sh 2 UNet_ADE20K >results/active_testing_ase.logs 2>results/active_testing_ase.err&
-sh active_testing_ase.sh 1 SEGNet_ADE20K >results/active_testing_ase.logs 2>results/active_testing_ase.err&
+sh active_testing_ase.sh 1 SEGNet_ADE20K >results/active_testing_ase_2.logs 2>results/active_testing_ase_2.err&
 sh active_testing_ase.sh 1 FCN_ADE20K >results/active_testing_ase.logs 2>results/active_testing_ase.err&
-sh active_testing_ase.sh 1 PSPNet_ADE20K >results/active_testing_ase.logs 2>results/active_testing_ase.err&
+sh active_testing_ase.sh 2 PSPNet_ADE20K >results/active_testing_ase_2.logs 2>results/active_testing_ase_2.err&
 
 # run_data.sh
 sh run_data.sh 3 UNet_VOC >data_logs/UNet_VOC.logs 2>data_logs/UNet_VOC.err& # 50 epoches
@@ -35,16 +35,19 @@ sh run_data.sh 3 UNet_CITY >data_logs/UNet_CITY.logs 2>data_logs/UNet_CITY.err& 
 sh run_data.sh 1 DeepLab_CITY >data_logs/DeepLab_CITY.logs 2>data_logs/DeepLab_CITY.err& # best_model
 sh run_data.sh 2 FCN_CITY >data_logs/FCN_CITY.logs 2>data_logs/FCN_CITY.err& # best_model
 
-sh run_data.sh 1 UNet_COCO >data_logs/UNet_COCO.logs 2>data_logs/UNet_COCO.err& # best_model
-sh run_data.sh 3 SEGNet_COCO >data_logs/SEGNet_COCO.logs 2>data_logs/SEGNet_COCO.err& # best_model
-sh run_data.sh 1 PSPNet_COCO >data_logs/PSPNet_COCO.logs 2>data_logs/PSPNet_COCO.err& # best_model
+sh run_data.sh 0 UNet_COCO >data_logs/UNet_COCO.logs 2>data_logs/UNet_COCO.err& # best_model
+sh run_data.sh 0 SEGNet_COCO >data_logs/SEGNet_COCO.logs 2>data_logs/SEGNet_COCO.err& # best_model
+sh run_data.sh 0 PSPNet_COCO >data_logs/PSPNet_COCO.logs 2>data_logs/PSPNet_COCO.err& # best_model
 sh run_data.sh 0 FCN_COCO >data_logs/FCN_COCO.logs 2>data_logs/FCN_COCO.err& # best_model
 
 sh run_data.sh 0 UNet_ADE20K >data_logs/UNet_ADE20K.logs 2>data_logs/UNet_ADE20K.err& # best_model
 sh run_data.sh 0 PSPNet_ADE20K >data_logs/PSPNet_ADE20K.logs 2>data_logs/PSPNet_ADE20K.err& # best_model
+sh run_data.sh 0 SEGNet_ADE20K >data_logs/SEGNet_ADE20K.logs 2>data_logs/SEGNet_ADE20K.err& # best_model
+sh run_data.sh 0 FCN_ADE20K >data_logs/FCN_ADE20K.logs 2>data_logs/FCN_ADE20K.err& # best_model
 
 ### active testing
 sh active_testing.sh >results/active_testing.logs 2>results/active_testing.err&
+sh active_testing.sh >results/active_testing_1.logs 2>results/active_testing_1.err&
 
 python active_testing.py --model_data_type PSPNet_VOC --data_type image
 python active_testing.py --model_data_type DeepLab_VOC --data_type image
