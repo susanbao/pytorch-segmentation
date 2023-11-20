@@ -709,14 +709,14 @@ SegResNet(
 Nbr of trainable parameters: 53657206
 
 val:
-Image loss: min  0.003739351173862815,  max 11.53046989440918
-Region 8x8 loss: min  0.0,  max 57.9756965637207
-Region 16x16 loss: min  0.0,  max 48.420955657958984
-Region 32x32 loss: min  0.0,  max 38.541751861572266
-Region 60x60 loss: min  0.0,  max 34.22746658325195
+Image loss: min  0.0037507726810872555,  max 11.530999183654785
+Region 8x8 loss: min  0.0,  max 63.46931457519531
+Region 16x16 loss: min  0.0,  max 48.49908447265625
+Region 32x32 loss: min  0.0,  max 38.55400085449219
+Region 60x60 loss: min  0.0,  max 34.29265594482422
 train:
-Image loss: min  0.0,  max 4.850096225738525
-Region 8x8 loss: min  0.0,  max 97.25211334228516
-Region 16x16 loss: min  0.0,  max 47.504547119140625
-Region 32x32 loss: min  0.0,  max 34.08951950073242
-Region 60x60 loss: min  0.0,  max 23.586450576782227
+Image loss: min  0.0,  max 4.84506893157959
+Region 8x8 loss: min  0.0,  max 101.15203094482422
+Region 16x16 loss: min  0.0,  max 47.76362228393555
+Region 32x32 loss: min  0.0,  max 34.22831726074219
+Region 60x60 loss: min  0.0,  max 23.569448471069336

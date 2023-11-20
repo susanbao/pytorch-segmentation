@@ -133,15 +133,15 @@ def main(args):
     store_main_folder = "runs_3_large_range" # runs_3, runs_3_large_range, runs_10_large_range
     check_folder_exist(f"./results/{store_main_folder}/{model_dataset}")
     
-    # step_list = {5000,10000,15000,20000}
-    step_list = {35000}
+    step_list = {5000,10000,15000,20000}
+    # step_list = {35000}
     # step_list = {100000}
     # step_list = {25000, 30000, 35000, 40000, 45000, 50000, 55000, 60000}
     # step_list = {25000,30000, 35000, 40000, 45000,55000, 65000, 70000, 75000, 80000,85000,90000,95000, 100000}
-    # step_list = np.arange(25000, 30001, 5000)
+    # step_list = np.arange(30000, 50001, 5000)
     # step_list = {65000, 70000, 75000, 80000,85000,90000,95000, 100000}
     
-    baseline_run = False
+    baseline_run = True
     
     if data_type == "image":
         true_losses = np_read(base_path + "image_true_losses.npy")

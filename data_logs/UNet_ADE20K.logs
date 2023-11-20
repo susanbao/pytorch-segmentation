@@ -193,9 +193,9 @@ UNetResnet(
   (conv5): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
   (upconv5): ConvTranspose2d(48, 32, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
   (conv6): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-  (conv7): Conv2d(32, 182, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (conv7): Conv2d(32, 150, kernel_size=(1, 1), stride=(1, 1), bias=False)
 )
-Nbr of trainable parameters: 30005680
+Nbr of trainable parameters: 30004656
 
 
 UNetResnet(
@@ -392,7 +392,7 @@ UNetResnet(
   (conv5): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
   (upconv5): ConvTranspose2d(48, 32, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
   (conv6): Conv2d(32, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-  (conv7): Conv2d(32, 182, kernel_size=(1, 1), stride=(1, 1), bias=False)
+  (conv7): Conv2d(32, 150, kernel_size=(1, 1), stride=(1, 1), bias=False)
 )
-Nbr of trainable parameters: 30005680
+Nbr of trainable parameters: 30004656
 
